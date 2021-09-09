@@ -1,0 +1,22 @@
+@charset "UTF-8";
+body{
+	margin: 0px;
+	font-family: "lato", sans-serif;
+}
+
+.container{
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.nav-wrapper {
+	display : flex;
+	justify-content : space-between;
+	padding : 38px;
+}
+
+.nav-link-wrapper {
+	height : 22px;
+	border-bottom : 1px solid transparent;
+	transition : border-bottom 0.5s
+}
