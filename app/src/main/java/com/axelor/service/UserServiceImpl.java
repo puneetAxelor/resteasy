@@ -1,6 +1,5 @@
 package com.axelor.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,10 +12,6 @@ import com.axelor.model.Employee;
 import com.axelor.model.Laptop;
 
 public class UserServiceImpl implements UserService {
-	
-
-
-	private List < Employee > emps = new ArrayList <Employee> ();
 	
 
 	public Employee createEmployee(EntityManager em, String name, String email, int lid, String lname) {
@@ -44,7 +39,8 @@ public class UserServiceImpl implements UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Employee> getEmployees(EntityManager em) {
 		
-		Query query = (Query) em.createQuery("Select e1 FROM Employee e1 ");
+		@SuppressWarnings("unchecked")
+		Query<Employee> query = (Query<Employee>) em.createQuery("Select e1 FROM Employee e1 ");
 		return query.getResultList();
 	}
 
@@ -61,9 +57,7 @@ public class UserServiceImpl implements UserService {
 
 		employee.getLaptop().add(laptop);
 		
-//		laptop.getEmployee().add(employee); 
-		
-//		em.merge(laptop);
+
 		em.merge(employee);
 		
 		return employee;

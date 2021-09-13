@@ -19,6 +19,7 @@
 				<td>Email</td>
 				<td>Laptop Id</td>
 				<td>Laptop Name</td>
+				<td>Action</td>
 			</tr>
 			<c:forEach items = "${lis}" var = "item">
 				<tr>
@@ -30,6 +31,8 @@
 					<td> ${ite.getLid()}</td>
 					<td> ${ite.getLname()}</td>
 					</c:forEach>
+					
+					<td><a href="http://localhost:8080/app/app/hello/autoupt/${item.id }">Update</a> | <a href="http://localhost:8080/app/app/hello/dele/${item.id }">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

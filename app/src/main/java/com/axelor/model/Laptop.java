@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="laptop_table")
-//@DiscriminatorValue(value = "laptop_type")
 public class Laptop {
 
 	@Id
@@ -51,6 +50,8 @@ public class Laptop {
 	public String toString() {
 		return "Laptop [lid=" + lid + ", lname=" + lname + ", employee=" + employee + "]";
 	}
+
+
 
 	
 	

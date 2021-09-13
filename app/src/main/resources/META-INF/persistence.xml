@@ -29,21 +29,3 @@
 
 </persistence>
 
-<!-- <property name="javax.persistence.schema-generation.database.action" value="create"/> -->
-
-<!-- 
-DOCKER
-docker run -name postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:alpine
-docker exec -it postgres bash
-psql -U postgres
-create database test; // colon is important
-\C TEST
-\l
-\D
-\D+
-\DT
-\q
-psql -h localhost -p 5432 -U postgres
-
-
- -->

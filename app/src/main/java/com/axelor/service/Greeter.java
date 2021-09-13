@@ -18,12 +18,10 @@ public class Greeter implements Greet {
 	@Inject
 	Provider<EntityManager> emp;
 
-//	@Qualifier
 	@Retention(RetentionPolicy.RUNTIME)
 	public
 	@interface Message {}
 	
-//	@Qualifier
 	@Retention(RetentionPolicy.RUNTIME)
 	public
 	@interface Count {}
