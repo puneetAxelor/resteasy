@@ -48,6 +48,11 @@ public class HelloResource {
 	@Path("/ok")
 	public void createEmployee(@FormParam("ename") String name, @FormParam("eemail") String email, @FormParam("lid") int lid, @FormParam("lname") String lname) {
 
+//		EntityManagerFactory emf=Persistence.createEntityManagerFactory("myFirstJpaUnit");  
+//		EntityManager em=emf.createEntityManager();  
+//	
+
+		
         Employee emp = userService.createEmployee(em, name, email, lid, lname);
     
         request.setAttribute("employee", emp);
@@ -71,9 +76,8 @@ public class HelloResource {
 	@GET
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
-
 	@Path("/employees")
-	public void getEmployees() {
+	public List<Employee> getEmployees() {
 		
 		greet.sayHello();
 		
@@ -85,9 +89,13 @@ public class HelloResource {
 			request.setAttribute("lis", list);
 			
 			request.forward("/listEmployees.jsp");
+	
+			return list;
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	
 	}
 	

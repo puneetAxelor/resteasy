@@ -30,7 +30,7 @@
 					</tr>
 					
 					<tr>
-						<td><a href="update.jsp">Update an Employee</a></td>
+						<td><a href="app/hello/employees">Update an Employee</a></td>
 					</tr>
 					
 					<tr>

@@ -7,7 +7,6 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import com.axelor.resource.HelloResource;
-import com.axelor.service.UserServiceImpl;
 
 @ApplicationPath("/restapi")
 public class RestEasyServices extends Application {
@@ -16,7 +15,6 @@ public class RestEasyServices extends Application {
 
     public RestEasyServices() {
         singletons.add(new HelloResource());
-        singletons.add(new UserServiceImpl());
     }
 
     @Override

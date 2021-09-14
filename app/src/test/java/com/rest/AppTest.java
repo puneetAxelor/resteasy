@@ -3,15 +3,74 @@
  */
 package com.rest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.axelor.App;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.axelor.resource.HelloResource;
 
 class AppTest {
+	
+	private HelloResource helloResource;
+
+	@Test
+	@DisplayName("Should print junit is working")
+	public void testAdd() {
+		String str = "Junit is working fine";
+		assertEquals("Junit is working fine", str);
+	}
+	
+	@BeforeAll
+	public static void setupAll() {
+		System.out.println("BeforeAll should print before all tests");
+	}
+	
+	@BeforeEach
+	public void setup() {
+		System.out.println("Instantiating controller");
+		helloResource = new HelloResource();
+	}
+	
+	@Test
+	@DisplayName("Should create employee")
+	public void shouldCreateEmployee() {
+		HelloResource helloResource = new HelloResource();
+		helloResource.createEmployee("Josh", "john@.com", 999, "Dell");
+		assertFalse(helloResource.getEmployees().isEmpty());
+		assertEquals(1, helloResource.getEmployees().size());
+	}
+	
+	@Test
+    @DisplayName("Should Not Create Employee When Name is Null")
+    public void shouldThrowRuntimeExceptionWhenNameIsNull() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            helloResource.createEmployee(null, "Doe@gmail.com", 888, "Hp");
+        });
+    }
+	
+	
+	
     @Test void appHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    } 
+    
+    @AfterEach
+    public void tearDown() {
+        System.out.println("Should Execute After Each Test");
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+        System.out.println("Should be executed at the end of the Test");
     }
 }

@@ -15,50 +15,65 @@ public class UserServiceImpl implements UserService {
 	
 
 	public Employee createEmployee(EntityManager em, String name, String email, int lid, String lname) {
-	        
-
-		
+	        		
 		Laptop laptop = new Laptop();
 		laptop.setLid(lid);
 		laptop.setLname(lname);
 		
-			 Employee employee = new Employee();
-			 employee.setName(name);
-			 employee.setEmail(email);
+		Employee employee = new Employee();
+		employee.setName(name);
+		employee.setEmail(email);
 			 
-			 employee.getLaptop().add(laptop);
-				
-			 laptop.getEmployee().add(employee); 
+		employee.getLaptop().add(laptop);		
+		laptop.getEmployee().add(employee); 
 			
-			 em.persist(laptop);
-			 em.persist(employee);
+		em.persist(laptop);
+		em.persist(employee);
 		    
-	        return employee;
-	    }
+	    return employee;
+	}
 	
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Employee> getEmployees(EntityManager em) {
 		
 		@SuppressWarnings("unchecked")
-		Query<Employee> query = (Query<Employee>) em.createQuery("Select e1 FROM Employee e1 ");
+		Query<Employee> query = (Query<Employee>) em.createQuery("Select e1 FROM Employee e1 ORDER BY e1.id asc");
 		return query.getResultList();
 	}
 
 	@Override
 	public Employee updateEmployee(EntityManager em, int id, String name, String email, int lid, String lname) {
+		Employee employee;
 		
-		Employee employee = em.find(Employee.class, id);
-		employee.setName(name);
-		employee.setEmail(email);
-		
-		Laptop laptop = em.find(Laptop.class, lid);
-		laptop.setLid(lid);
-		laptop.setLname(lname);
-
-		employee.getLaptop().add(laptop);
-		
-
-		em.merge(employee);
+		if (em.find(Laptop.class, lid) != null) {
+			employee = em.find(Employee.class, id);
+			employee.setName(name);
+			employee.setEmail(email);
+			
+			Laptop laptop = em.find(Laptop.class, lid);
+			laptop.setLid(lid);
+			laptop.setLname(lname);
+	
+			employee.getLaptop().add(laptop);
+			
+	
+			em.merge(employee);
+		} else {
+			Laptop laptop = new Laptop();
+			laptop.setLid(lid);
+			laptop.setLname(lname);
+			
+			employee = new Employee();
+			employee.setName(name);
+			employee.setEmail(email);
+			
+			employee.getLaptop().add(laptop);
+			
+			laptop.getEmployee().add(employee); 
+			
+			em.persist(laptop);
+			em.persist(employee);
+		}
 		
 		return employee;
 	}

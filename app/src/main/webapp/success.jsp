@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Transaction Successful</h1>
+<h1>Operation Successful</h1>
 </body>
 </html>
